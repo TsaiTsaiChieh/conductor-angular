@@ -1,0 +1,67 @@
+<div class="container">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Workflow Name</mat-label>
+    <input matInput #input [(ngModel)]="workflowName" />
+    @if (workflowName()) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="workflowName.set('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Workflow ID</mat-label>
+    <input matInput #input [(ngModel)]="workId" (input)="onInput($event)" />
+    @if (workId()) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="workId.set('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="status">
+      <mat-option value="running">Running</mat-option>
+      <mat-option value="completed">Completed</mat-option>
+      <mat-option value="failed">Failed</mat-option>
+      <mat-option value="timeout">Timeout</mat-option>
+      <mat-option value="terminated">Terminated</mat-option>
+      <mat-option value="paused">Paused</mat-option>
+    </mat-select>
+    @if (status()) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="status.set('')">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="rangePicker">
+      <input matStartDate placeholder="Start date" />
+      <input matEndDate placeholder="End date" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #rangePicker>
+      <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancel</button>
+        <button mat-raised-button matDateRangePickerApply>Apply</button>
+      </mat-date-range-picker-actions>
+    </mat-date-range-picker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Lookback (days)</mat-label>
+    <input matInput #input [(ngModel)]="days" />
+    @if (days()) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="days.set(undefined)">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+  <button mat-fab extended color="primary" (click)="searchWorkflow()">
+    Search
+  </button>
+</div>
